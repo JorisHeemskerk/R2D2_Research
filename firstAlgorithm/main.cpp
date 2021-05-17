@@ -41,13 +41,24 @@ std::array<unsigned int, 3> locate(const std::array<std::array<std::array<uint8_
     return guess;
 }
 
-
+// WHIP🚗💦🥵( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)
+// std::array<uint8_t, 2> blockTally(std::array<std::array<uint8_t, 2>, 10> recentPositions, unsigned int blockCount){
+//     // std::array<std::array<uint8_t, blockCount>, blockCount> result;
+//     std::array<std::array<uint8_t, 3>, blockCount*blockCount> result;
+    
+//     for (std::array<uint8_t, 2> position : recentPositions){
+//         result[position[0]][position[1]]++;
+//     }
+//     return result;
+// }
 
 
 int main( void ){   
 
 hwlib::wait_ms(1000);
 hwlib::cout << "terminal has started\n";  
+
+std::array<uint8_t, 2> recentPosition = {};
 
 for(unsigned int i=0; i<20; i++){
     hwlib::cout << "increasing H value: " << i << '\n';
