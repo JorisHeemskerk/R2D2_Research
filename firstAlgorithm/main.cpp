@@ -23,12 +23,12 @@ std::array<unsigned int, 3> locate(const std::array<std::array<std::array<uint8_
 
     for(unsigned int i=0; i<image.size(); i++){
         for(unsigned int j=0; j<image[i].size(); j++){
-            H = image[i][j][0];
-            if(H <= 128){
-                H = 2*(128-H) * hScale;
-            }else{
-                H = 2*(H-128) * hScale;
-            }
+            H = image[i][j][0] * hScale;
+            // if(H <= 128){
+            //     H = 2*(128-H) * hScale;
+            // }else{
+            //     H = 2*(H-128) * hScale;
+            // }
             S = image[i][j][1] * sScale;
             V = image[i][j][2] * vScale; 
 
