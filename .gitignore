@@ -1,0 +1,8 @@
+*.o
+*_flags
+.vscode
+bmptk_*
+*.elf
+*.hex
+*.ld
+*.map
