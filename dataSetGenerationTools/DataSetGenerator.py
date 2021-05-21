@@ -2,20 +2,19 @@ import os
 import pygame, sys
 import time
 import numpy as np
-from skimage import color
+from skimage import color as skcolor
 from skimage import transform
+#import math
 
 from pygame.locals import *
 import pygame.camera
 
-setName = "prototype"
-setSize = 10
-windowWidth = 640
-windowHeight = 480
-
 #change these to affect the resulting resolution
 xTargetRes = 126
 yTargetRes = 126
+
+setName = "prototype"
+setSize = 10
 
 try:
     os.mkdir(setName)
@@ -27,14 +26,18 @@ except OSError:
 else:
     print(f"Created directory '{setName}'")
 
+#def fractionToByte(fraction):
+#    fraction = max(0.0, min(1.0, fraction))
+#    return math.floor(255 if fraction == 1.0 else fraction * 256.0)
+
 #initialise pygame   
 pygame.init()
 pygame.camera.init()
-cam = pygame.camera.Camera("/dev/video0",(windowWidth,windowHeight))
+cam = pygame.camera.Camera("/dev/video0",(xTargetRes,yTargetRes))
 cam.start()
  
 #setup window
-windowSurfaceObj = pygame.display.set_mode((windowWidth,windowHeight),1,16)
+windowSurfaceObj = pygame.display.set_mode((xTargetRes,yTargetRes),1,16)
 pygame.display.set_caption('Camera')
 
 coords = np.empty((setSize, 2))
@@ -44,18 +47,21 @@ while counter < setSize:
     image = cam.get_image()
 
     #convert image
-    if len(image) < len(image[0]): #for images wider than they are high
-        image = transform.resize(image, (yTargetRes, int( (yTargetRes / len(image)) * len(image[0])) ), anti_aliasing = True)
+    npImage = pygame.surfarray.array3d(image)
+    
+    if len(npImage) < len(npImage[0]): #for images wider than they are high
+        npImage = transform.resize(npImage, (yTargetRes, int( (yTargetRes / len(npImage)) * len(npImage[0])) ), anti_aliasing = True)
 
-        image = image[0 : yTargetRes+1, (len(image[0])-xTargetRes)//2 : ((len(image[0])-xTargetRes)//2)+xTargetRes]
+        npImage = npImage[0 : yTargetRes+1, (len(npImage[0])-xTargetRes)//2 : ((len(npImage[0])-xTargetRes)//2)+xTargetRes]
 
-    if len(image) > len(image[0]): #for images higher than they are wide
-        image = transform.resize(image, ( int( (xTargetRes / len(image[0])) * len(image)), xTargetRes ), anti_aliasing = True)
+    elif len(npImage) > len(npImage[0]): #for images higher than they are wide
+        npImage = transform.resize(npImage, ( int( (xTargetRes / len(npImage[0])) * len(npImage)), xTargetRes ), anti_aliasing = True)
 
-        image = image[(len(image)-yTargetRes)//2 : ((len(image)-yTargetRes)//2)+yTargetRes, 0 : xTargetRes]
-
+        npImage = npImage[(len(npImage)-yTargetRes)//2 : ((len(npImage)-yTargetRes)//2)+yTargetRes, 0 : xTargetRes]
+    
     #display the image
-    catSurfaceObj = image
+        
+    catSurfaceObj = pygame.surfarray.make_surface(255*npImage/npImage.max())
     windowSurfaceObj.blit(catSurfaceObj,(0,0))
     pygame.display.update()
     
@@ -64,7 +70,9 @@ while counter < setSize:
     if pygame.mouse.get_pressed()[0]:
         pos = pygame.mouse.get_pos()
         #save image
-        image = color.rgb2hsv(image)
+        npImage = skcolor.rgb2hsv(npImage)
+        catSurfaceObj = pygame.surfarray.make_surface(255*npImage/npImage.max())
+        windowSurfaceObj.blit(catSurfaceObj,(0,0))
         pygame.image.save(windowSurfaceObj, f'{setName}/{counter}.jpg')
         coords[counter][0], coords[counter][1] = pos[0], pos[1]
         counter += 1
