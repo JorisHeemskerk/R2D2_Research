@@ -13,8 +13,8 @@ import pygame.camera
 xTargetRes = 126
 yTargetRes = 126
 
-setName = "prototype"
-setSize = 10
+setName = "r3d"
+setSize = 30
 
 try:
     os.mkdir(setName)
@@ -42,9 +42,14 @@ pygame.display.set_caption('Camera')
 
 coords = np.empty((setSize, 2))
 counter = 0
+loopCount = 0
+image = cam.get_image()
 while counter < setSize:
-    #take a image
-    image = cam.get_image()
+    if loopCount >= 25:
+        #take a image
+        image = cam.get_image()
+        loopCount = 0
+    loopCount += 1
 
     #convert image
     npImage = pygame.surfarray.array3d(image)
@@ -75,6 +80,7 @@ while counter < setSize:
         windowSurfaceObj.blit(catSurfaceObj,(0,0))
         pygame.image.save(windowSurfaceObj, f'{setName}/{counter}.jpg')
         coords[counter][0], coords[counter][1] = pos[0], pos[1]
+        print(counter)
         counter += 1
         time.sleep(1)
 with open(f'{setName}/_coordList.npy', 'wb') as f:
