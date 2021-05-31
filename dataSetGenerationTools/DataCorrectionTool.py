@@ -18,7 +18,7 @@ from skimage import color as skcolor
 # set parameters
 display_width = 126
 display_height = 126
-setName = "test"
+setName = "whiteLight"
 
 # see if folder exists and ask user if they are sure they want to continue
 if path.exists(setName):
@@ -86,7 +86,6 @@ while not crashed:
 pygame.quit()
 
 print("All items have been corrected, time to save!")
-time.sleep(1)
 
 try:
     os.mkdir(f'{setName}_corrected')
@@ -96,7 +95,7 @@ except OSError:
     if userInput == 'N' or userInput == 'n':
         exit(69)
 else:
-    folder = '/path/to/folder'
+    folder = f'{setName}_corrected'
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
