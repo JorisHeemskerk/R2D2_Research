@@ -4,7 +4,7 @@ This GitHub repository contains all the toolings and code required to facilitate
 
 ## Communication Protocol
 
-The following section lists the pinouts that are used by the simple communication protocol that we've created in order to transfer data from a Raspberry Pi to a Teensy. Our initial approach was aimed at using existing libraries/protocol implementations to accomplish this. Unfortunately, due to some buffering issues with the Broadcom chip that some of the newer Raspberry Pi models are using, we ended up with writing our own implementation.
+The following section lists the pinouts that are used by the simple communication protocol that we've created in order to transfer data from a Raspberry Pi to a Teensy. Our initial approach was aimed at using existing libraries/protocol implementations to accomplish this. Unfortunately, due to some buffering issues with the Broadcom chip that some of the newer Raspberry Pi models use, we had to resort to writing our own communication protocol.
 
 Name | Teensy | Raspberry Pi
 -----|--------|-------------
