@@ -9,7 +9,7 @@ namespace tsy = hwlib::target;
 
 namespace {
 constexpr bool debug{
-    // true // uncomment this to enable debugging
+    //true // uncomment this to enable debugging
 };
 static unsigned msg_id{};
 
@@ -45,9 +45,9 @@ class protocol {
     };
 public:
     protocol():
-        bit0{tsy::pins::d14},
+        bit0{tsy::pins::d22},
         bit1{tsy::pins::d15},
-        bit2{tsy::pins::d22},
+        bit2{tsy::pins::d16},
         bit3{tsy::pins::d17},
         bit4{tsy::pins::d18},
         bit5{tsy::pins::d19},
@@ -105,8 +105,9 @@ public:
         }
     }
 
-    decltype(ring_buff::data) const& get_data() const
+    decltype(ring_buff::data) & get_data() 
     { return buff.data; }
+
 private:
     bool is_crc32_valid(unsigned bytes_read) const {
         using crc_type = std::uint32_t;
