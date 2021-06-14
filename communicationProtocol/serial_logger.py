@@ -1,6 +1,6 @@
 import serial
 
-write_to_file_path = "output/output_blackDark_corrected.txt"
+write_to_file_path = "output/output_mirror_corrected.txt"
 
 ser = serial.Serial(
     port='COM7',
