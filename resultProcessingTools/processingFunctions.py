@@ -110,4 +110,16 @@ def get_accuracy(resultsDict, checksums, coordList, h, s, v, maxDistance):
         if distance < maxDistance:
             nCorrectGuesses += 1
     return nCorrectGuesses / len(coordList)
-        
+
+def accuracy_based_find_best_and_worst_hsv_scales(resultsDict, checksums, coordList, maxDistance, scaleStart=0, scaleEnd=10):
+    best = (0,0,0,-1)
+    worst = (0,0,0,float('inf'))
+    for h in range(scaleStart, scaleEnd):
+        for s in range(scaleStart, scaleEnd):
+            for v in range(scaleStart, scaleEnd):
+                acc = get_accuracy(resultsDict, checksums, coordList, h,s,v, maxDistance)
+                if acc > best[3]:
+                    best = (h,s,v,acc)
+                elif acc < worst[3]: #Using elif here should make it impossible for the worst to have h,s,v == 0,0,0
+                    worst = (h,s,v,acc)
+    return best, worst

@@ -6,7 +6,7 @@ from skimage import io
 import math
 
 from scatterGraph import scatter_graph
-from processingFunctions import load_checksums_from_images, load_results_dict, find_avg_best_and_worst_hsv_scales, get_accuracy
+from processingFunctions import load_checksums_from_images, load_results_dict, find_avg_best_and_worst_hsv_scales, get_accuracy, accuracy_based_find_best_and_worst_hsv_scales
 
 # These setnames are assumed to reference the corrected variants, 
 # make sure to run dataSetGenerationTools/DataCorrectionTool.py on any new datasets! 
@@ -37,6 +37,9 @@ for setName in setNames:
     #bestHSV, worstHSV = find_avg_best_and_worst_hsv_scales(resultsDict, checksums, coordList)
     #print(f'For {setName} the best HSV values are {bestHSV} and the worst HSV values are {worstHSV}')
 
-    h,s,v = 1, 1, 1
+    #h,s,v = 1, 1, 1
     maxDistance = 20
-    print(f'Accuracy on the {setName} dataset with HSV multipliers ({h}, {s}, {v}) and maxDistance {maxDistance} is {round(get_accuracy(resultsDict, checksums, coordList, h, s, v, maxDistance) * 100, 1)}%.')
+    #print(f'Accuracy on the {setName} dataset with HSV multipliers ({h}, {s}, {v}) and maxDistance {maxDistance} is {round(get_accuracy(resultsDict, checksums, coordList, h, s, v, maxDistance) * 100, 1)}%.')
+
+    best, worst = accuracy_based_find_best_and_worst_hsv_scales(resultsDict, checksums, coordList, maxDistance)
+    print(f'For {setName} the best HSV values are {best[:3]} with an accuracy of {round(best[3] * 100, 1)}% and the worst HSV values are {worst[:3]} with an accuracy of {round(worst[3] * 100, 1)}%.')
