@@ -123,3 +123,23 @@ def accuracy_based_find_best_and_worst_hsv_scales(resultsDict, checksums, coordL
                 elif acc < worst[3]: #Using elif here should make it impossible for the worst to have h,s,v == 0,0,0
                     worst = (h,s,v,acc)
     return best, worst
+
+def get_all_accuracies(resultsDict, checksums, coordList, maxDistance, scaleStart=0, scaleEnd=10):
+    accuracies = []
+    for h in range(scaleStart, scaleEnd):
+        for s in range(scaleStart, scaleEnd):
+            for v in range(scaleStart, scaleEnd):
+                accuracies.append(get_accuracy(resultsDict, checksums, coordList, h,s,v, maxDistance)) 
+    return accuracies
+
+def find_best_from_accuracies(accuracies, scaleStart=0, scaleEnd=10):
+    best = (0,0,0,-1)
+    for h in range(scaleStart, scaleEnd):
+        for s in range(scaleStart, scaleEnd):
+            for v in range(scaleStart, scaleEnd):
+                totAcc = 0
+                for dataSet in accuracies:
+                    totAcc += dataSet[(h*100)+(s*10)+v]
+                if (totAcc/len(accuracies)) > best[3]:
+                    best = (h,s,v,totAcc/len(accuracies))
+    return best
