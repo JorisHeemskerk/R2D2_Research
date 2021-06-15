@@ -18,7 +18,7 @@ from skimage import color as skcolor
 # set parameters
 display_width = 126
 display_height = 126
-setName = "blackLight"
+setName = "../datasets/blackLight"
 
 # see if folder exists and ask user if they are sure they want to continue
 if path.exists(setName):

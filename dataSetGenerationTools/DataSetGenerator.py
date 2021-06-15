@@ -13,7 +13,8 @@ import pygame.camera
 xTargetRes = 126
 yTargetRes = 126
 
-setName = "r3d"
+# Update this to the name you want!
+setName = "../datasets/r3d"
 setSize = 30
 
 try:
@@ -45,9 +46,9 @@ counter = 0
 loopCount = 0
 image = cam.get_image()
 while counter < setSize:
-    if loopCount >= 25:
-        #take a image
-        image = cam.get_image()
+    if loopCount >= 25:         # You can mess with this number to change the framerate,
+        #take a image           # we found it easier to accurately click the laser on a lower framerate, 
+        image = cam.get_image() # but it does take longer that way.
         loopCount = 0
     loopCount += 1
 

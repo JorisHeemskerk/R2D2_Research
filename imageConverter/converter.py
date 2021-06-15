@@ -6,6 +6,13 @@ import numpy as np
 import os
 import math
 
+
+# This converter enables you to make .hpp files from images,
+# making it possible to compile them along with a program.
+# we used this before we got the communication between the
+# pi and teensy working.
+
+
 ### For usage,
 ### make an 'input' folder and put some pngs and/or jpgs in there
 ### then configure the desired resolution below and run the tool
