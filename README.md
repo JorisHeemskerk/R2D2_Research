@@ -64,6 +64,11 @@ Dit zijn de tools die wij gebruikt hebben om onze resultaten te krijgen uit de d
 Om ze te gebruiken moet je de Raspberry Pi en Teensy aansluiten zoals in onderstaande tabel. 
 Vervolgens kun je onderin protocol-pi.py de directory aanpassen zodat deze naar de correcte dataset wijst.
 Daarna open je de serial-logger.py en pas je ook daar de dataset naam aan. 
+Dan start je eerst protocol-pi.py, dan serial-logger.py en als laatste run je de makefile ('make run', in de juiste folder (vergeet niet op het knopje op de Teensy te drukken))
+Als de protocol-pi.py klaar is, ga je naar serial-logger.py en stop je deze met ctrl+c, echter stop hij dan niet meteen, want hij moet nog één keer iets binnen krijgen op de serial port. Daarom run je de serialFlusher.
+
+Nu kun je de resultaten, op de locatie die je in serial-logger.py hebt aangeven, gebruiken om de resultProcessingTools te runnen.
+
 
 ## Communication Protocol Pin-in/-out
 Name | Teensy | Raspberry Pi
