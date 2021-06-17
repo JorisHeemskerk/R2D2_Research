@@ -1,5 +1,4 @@
 # R2D2 Research
-
 ###### *For EN users, the readme is in Dutch for consistency with the paper, but the code should be self-explanatory enough.
 
 ###### This GitHub repository contains all the toolings and code required to facilitate our R2D2 research project (Hogeschool Utrecht, 2021).
@@ -11,7 +10,7 @@ Deze GitHub repository bevant alle tools en code die horen bij ons R2D2 research
 We hebben onze verschillende tools en andere resources in folder structuur ondergebracht. Hieronder is een overzicht te zien, waar in de komende 'hoofdstukken' per onderdeel verder op in gegaan zal worden.
 
     .
-    ├── algorithm                   # Onze algoritmen in c++ en wat simpele testcode
+    ├── algorithm                   # Onze algoritmes in c++ en wat simpele testcode
     |                               
     ├── algorithmTestingTools       # Alle tools die nodig zijn om afbeeldingen van 
     |                               # de Pi naar de Teensy te sturen, deze door het algoritme te 
@@ -35,6 +34,31 @@ We hebben onze verschillende tools en andere resources in folder structuur onder
     ├── .gitignore                   
     ├── makefile.link               # Een bestand voor c++ compilatie met de hwlib/bmptk suite (github.com/wovo)
     └── README.md                   # Dit bestand.
+
+# algorithm
+    algorithm              
+    ├── basicAlgorithm
+    └── patchAlgorithm
+
+We hebben twee algoritmes ontworpen, deze zijn in de subfolders te vinden in de vorm van c++ code, met daarbij een kleine test opzet. Dit maakt gebruik van de afbeeldingen, in de vorm van headers, uit de imageConverter.
+
+Het basicAlgorithm is het algoritme wat we daadwerkelijk in onze experimenten hebben gebruikt.
+Het patchAlgorithm is een, in theorie, snellere versie die we wegens tijdgebrek niet hebben kunnen gebruiken in onze experimenten.
+
+# algorithmTestingTools
+    algorithmTestingTools
+    ├── serialFlusher           # Een klein c++ programmatje dat één regel cout, om de serial-logger.py te kunnen stoppen (zie #serial-logger)
+    |
+    ├── algorithm-tester.hpp    # Dit groepje bestanden is alle code voor 
+    ├── crc32.hpp               # het ontvangen van de afbeeldingen via 
+    ├── main.cpp                # ons protocol, het uitvoeren van het 
+    ├── makefile                # algoritme op deze afbeeldingen en het 
+    ├── protocol-tsy.hpp        # cout'en van de resultaten.
+    |
+    ├── protocol-pi.py          # De code voor het versturen van afbeeldingen vanaf de Raspberry Pi.
+    |
+    └── serial-logger.py        # Een simpel python programma dat de serial output 
+                                # van de Teensy opslaat naar een text bestand.
 
 
 
