@@ -1,6 +1,33 @@
 # R2D2 Research
 
-This GitHub repository contains all the toolings and code required to facilitate our R2D2 research project (Hogeschool Utrecht, 2021).
+###### *For EN users, the readme is in Dutch for consistency with the paper, but the code should be self-explanatory enough.
+
+###### This GitHub repository contains all the toolings and code required to facilitate our R2D2 research project (Hogeschool Utrecht, 2021).
+
+Deze GitHub repository bevant alle tools en code die horen bij ons R2D2 research project (Hogeschool Utrech, 2021)
+
+# Inhoud
+
+    .
+    ├── algorithm                   # Folder met onze algoritmen in c++ en wat simpele testcode
+    |                               
+    ├── algorithmTestingTools       # Folder met alle tools die nodig zijn om afbeeldingen van 
+    |                               # de Pi naar de Teensy te sturen, deze door het algoritme te 
+    |                               # halen en de resultaten naar een text bestand op te slaan.
+    |                               
+    ├── datasetGenerationTools      # 
+    |                               
+    ├── datasets                    #
+    |                                
+    ├── imageConverter              #
+    |                                
+    ├── resultProcessingTools       #
+    |                                
+    ├── results                     #
+    |                                
+    ├── .gitignore                   
+    ├── makefile.link               # Een bestand voor c++ compilatie met de [hwlib](https://github.com/wovo/hwlib)/[bmptk](https://github.com/wovo/bmptk) suite
+    └── README.md                   # Dit bestand.
 
 ## Communication Protocol
 
