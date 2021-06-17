@@ -9,7 +9,7 @@ Deze GitHub repository bevant alle tools en code die horen bij ons R2D2 research
 
 We hebben onze verschillende tools en andere resources in folder structuur ondergebracht. Hieronder is een overzicht te zien, waar in de komende 'hoofdstukken' per onderdeel verder op in gegaan zal worden.
 
-    .
+
     ├── algorithm                   # Onze algoritmes in c++ en wat simpele testcode
     |                               
     ├── algorithmTestingTools       # Alle tools die nodig zijn om afbeeldingen van 
@@ -57,14 +57,56 @@ Het patchAlgorithm is een, in theorie, snellere versie die we wegens tijdgebrek 
     |
     ├── protocol-pi.py          # De code voor het versturen van afbeeldingen vanaf de Raspberry Pi.
     |
-    └── serial-logger.py        # Een simpel python programma dat de serial output 
+    └── serial-logger.py        # Een simpel python programma dat de serial output. 
                                 # van de Teensy opslaat naar een text bestand.
 
+# datasetGenerationTools
+    datasetGenerationTools
+    ├── DataCorrectionTool.py   # Een tool om een dataset te corrigeren.
+    ├── DataSetGenerator.py     # Een tool om een dataset mee aan te maken
+    └── NpyListReader.py        # Print je .npy bestanden
 
+Om de DataCorrection tool te gebruiken pas je de "setName" variabele aan naar de folder van je dataset. Met je muis kan je de cirkel verplaatsen, met enter ga je naar de volgende afbeelding en met backspace verwijder je de afbeelding. Het resultaat wordt opgeslagen in een [naam van je dataset]_corrected folder.
+
+Om de DataSetGenerator te gebruiken geef je opniew de folder waar je je dataset in wil hebben aan in de "setName" variabele. De grootte van de dataset pas je aan in de setSize variabele. De resolutie is aan te passen met de x- en yTargetRes. Om een foto op te slaan klik je op de window op de plek waar je de laser ziet.
+
+met NpyListReader kan je .npy bestanden die de dataset generator creert uitprinten voor debug purposes. De naam van de dataset waarin het .npy bestand staat stop je opniew in de setName variabele
+
+# datasets
+    datasets
+    ├── [nameOfDataset]             # Datasets gemaakt met de generator
+    └── [nameOfDataset]_corrected   # Datasets gecorrigeerd door de correction tool
+Een dataset zelf bestaat uit een lijst aan .jpg bestanden en een _coordList.npy die alle XY-coördinaten per afbeelding bevat.
+
+# imageConverter
+    imageConverter
+    ├── input            # De input folder voor de converter.
+    ├── sample_images    # Een map met voorbeeld afbeeldingen
+    ├── converter.py     # Een tool die een afbeelding omzet naar een .hpp bestand.
+    └── images.hpp       # Het resultaat van de converter.
+De converter pakt alle afbeeldingen uit de input folder (alleen de .jpg en .png bestanden) en zet deze om tot images.hpp. In de .hpp file komen de afbeeldingen samen tot static const std::array<std::array<std::array<std::array<uint8_t, 3>, 126>, 126>, 2> genaamd images. Deze .hpp file kan je gebruiken om een snelle test uit te voeren op de Teensy (of andere microcontroller).
+pas de resolutie van de afbeeldingen aan met de x- en yTargetRes variabelen.
+
+# imageConverter
+    imageConverter.
+    ├── old                      # Een eerdere versie van de tools.
+    ├── processResults.py        # Een tool om resultaten te berekenen.
+    ├── processingFunctions.py   # De functies voor processingResults.py.
+    └── scatterGraph.py          # De img en het resultaat in een grafiek.
+De processResults tool kan alle datastes in "setnames" processen en 
+Momenteel berekent de processResults de accuracy per dataset en de gemiddelde accuracy voor een gespecificeerde HSV scale value (in te vullen op line 43).
+
+De tool kan ook een scattergraph, op de gemiddelde accuracy (gebaseerd de beste hsv cale value), de beste en slechtste scale combinaties per dataset genereren. Hiervoor dienen een aantal regels uitgecomment te worden.
+Om de foutmarge te verkleinen kan je de maxDistance variabele aanpassen (dit is de range rond de correcte XY die toch goedgekeurd wordt.)
+
+# results
+    imageConverter.
+    └── output[nameOfDataset].txt     # de resultaten
+Dit bestand bevat een lijst van alle afbeeldingen. De grans tussen de afbeeldingen wordt aangegeven door middel van de crc code
 
 ## Communication Protocol
 
-The following section lists the pinouts that are used by the simple communication protocol that we've created in order to transfer data from a Raspberry Pi to a Teensy. Our initial approach was aimed at using existing libraries/protocol implementations to accomplish this. Unfortunately, due to some buffering issues with the Broadcom chip that some of the newer Raspberry Pi models use, we had to resort to writing our own communication protocol.
+De volgende lijst bevat de pinouts die we gebruiken met ons zelf gemaakte communicatie protocol. Zie ons onderzoeksverslag voor meer informatie.
 
 Name | Teensy | Raspberry Pi
 -----|--------|-------------
