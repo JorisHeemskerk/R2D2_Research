@@ -8,26 +8,35 @@ Deze GitHub repository bevant alle tools en code die horen bij ons R2D2 research
 
 # Inhoud
 
+We hebben onze verschillende tools en andere resources in folder structuur ondergebracht. Hieronder is een overzicht te zien, waar in de komende 'hoofdstukken' per onderdeel verder op in gegaan zal worden.
+
     .
-    ├── algorithm                   # Folder met onze algoritmen in c++ en wat simpele testcode
+    ├── algorithm                   # Onze algoritmen in c++ en wat simpele testcode
     |                               
-    ├── algorithmTestingTools       # Folder met alle tools die nodig zijn om afbeeldingen van 
+    ├── algorithmTestingTools       # Alle tools die nodig zijn om afbeeldingen van 
     |                               # de Pi naar de Teensy te sturen, deze door het algoritme te 
     |                               # halen en de resultaten naar een text bestand op te slaan.
     |                               
-    ├── datasetGenerationTools      # 
+    ├── datasetGenerationTools      # De tools om nieuwe datasets te maken en deze te corrigeren.
     |                               
-    ├── datasets                    #
+    ├── datasets                    # De datasets die wij gemaakt hebben.
     |                                
-    ├── imageConverter              #
+    ├── imageConverter              # Een converter die afbeelding naar het HSV spectrum en de
+    |                               # juiste afmetingen vertaald en deze vervolgens in een
+    |                               # compileerbare header file zet.
     |                                
-    ├── resultProcessingTools       #
+    ├── resultProcessingTools       # De tools om de resultaten van algorithmTestingTools te
+    |                               # verwerken tot bruikbare dingen, zoals een accuracy 
+    |                               # percentage of scatter graph.
     |                                
-    ├── results                     #
+    ├── results                     # De resultaten van het uitvoeren van de tools in
+    |                               # algorithmTestingTools.
     |                                
     ├── .gitignore                   
-    ├── makefile.link               # Een bestand voor c++ compilatie met de [hwlib](https://github.com/wovo/hwlib)/[bmptk](https://github.com/wovo/bmptk) suite
+    ├── makefile.link               # Een bestand voor c++ compilatie met de hwlib/bmptk suite (github.com/wovo)
     └── README.md                   # Dit bestand.
+
+
 
 ## Communication Protocol
 
