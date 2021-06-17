@@ -60,6 +60,29 @@ Het patchAlgorithm is een, in theorie, snellere versie die we wegens tijdgebrek 
     └── serial-logger.py        # Een simpel python programma dat de serial output. 
                                 # van de Teensy opslaat naar een text bestand.
 
+Dit zijn de tools die wij gebruikt hebben om onze resultaten te krijgen uit de datasets en het algoritme.
+Om ze te gebruiken moet je de Raspberry Pi en Teensy aansluiten zoals in onderstaande tabel. 
+Vervolgens kun je onderin protocol-pi.py de directory aanpassen zodat deze naar de correcte dataset wijst.
+Daarna open je de serial-logger.py en pas je ook daar de dataset naam aan. 
+
+## Communication Protocol Pin-in/-out
+Name | Teensy | Raspberry Pi
+-----|--------|-------------
+bit0 | d14 | gpio6
+bit1 | d15 | gpio13
+bit2 | d16 | gpio19
+bit3 | d17 | gpio26
+bit4 | d18 | gpio12
+bit5 | d19 | gpio16
+bit6 | d20 | gpio20
+bit7 | d21 | gpio21
+||
+teensy_ready | d10 | gpio9
+pi_ready |  d11 | gpio25
+||
+start_signal | d8 | gpio11
+stop_signal | d9 | gpio8
+
 # datasetGenerationTools
     datasetGenerationTools
     ├── DataCorrectionTool.py   # Een tool om een dataset te corrigeren.
@@ -103,24 +126,3 @@ Om de foutmarge te verkleinen kan je de maxDistance variabele aanpassen (dit is 
     imageConverter.
     └── output[nameOfDataset].txt     # de resultaten
 Dit bestand bevat een lijst van alle afbeeldingen. De grans tussen de afbeeldingen wordt aangegeven door middel van de crc code
-
-## Communication Protocol
-
-De volgende lijst bevat de pinouts die we gebruiken met ons zelf gemaakte communicatie protocol. Zie ons onderzoeksverslag voor meer informatie.
-
-Name | Teensy | Raspberry Pi
------|--------|-------------
-bit0 | d14 | gpio6
-bit1 | d15 | gpio13
-bit2 | d16 | gpio19
-bit3 | d17 | gpio26
-bit4 | d18 | gpio12
-bit5 | d19 | gpio16
-bit6 | d20 | gpio20
-bit7 | d21 | gpio21
-||
-teensy_ready | d10 | gpio9
-pi_ready |  d11 | gpio25
-||
-start_signal | d8 | gpio11
-stop_signal | d9 | gpio8
